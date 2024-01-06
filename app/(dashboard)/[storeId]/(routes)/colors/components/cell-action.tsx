@@ -15,12 +15,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import AlertModal from "@/components/modals/alert-modal";
-
-import {CategoryColumn} from "@/app/(dashboard)/[storeId]/(routes)/categories/components/columns";
+import { ColorColumn } from "@/app/(dashboard)/[storeId]/(routes)/colors/components/columns";
 
 
 interface CellActionProps {
-    data: CategoryColumn;
+    data: ColorColumn;
 }
 export const CellAction = ({ data }: CellActionProps) => {
 
@@ -32,18 +31,18 @@ export const CellAction = ({ data }: CellActionProps) => {
 
     const onCopy = (id: string) => {
         navigator.clipboard.writeText(id);
-        toast.success("Category Id copied to the clipboard.")
+        toast.success("Color Id copied to the clipboard.")
     }
 
     const onDelete = async () => {
         try {
             setLoading(true)
-            await axios.delete(`/api/${params.storeId}/categories/${data.id}`);
+            await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
             router.refresh();
-            toast.success("Category deleted!")
+            toast.success("Color deleted!")
 
         } catch (error) {
-            toast.error("Make sure you removed all products using this category first.")
+            toast.error("Make sure you removed all products using this color first.")
         }
         finally {
             setLoading(false);
@@ -76,7 +75,7 @@ export const CellAction = ({ data }: CellActionProps) => {
                         <Copy className="mr-2 h-4 w-4"/>
                         Copy Id
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/categories/${data.id}`)}>
+                    <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/colors/${data.id}`)}>
                         <Edit className="mr-2 h-4 w-4"/>
                         Update
                     </DropdownMenuItem>
